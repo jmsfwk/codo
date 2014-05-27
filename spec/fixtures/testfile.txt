@@ -1,0 +1,7 @@
+luke: ->
+yoda: (arg1) ->
+obiwan: (arg1, arg2, arg3) ->
+voldemort; (not, really) -=>
+quigon: =>
+windu: (arg1) =>
+anakin: (arg1, arg2, arg3) =>
