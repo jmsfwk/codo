@@ -1,9 +1,11 @@
 {
   "name": "coffeedocs",
   "main": "./lib/main",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Generate CoffeeScript documentation following the atom styleguide",
-  "activationEvents": ["coffeedocs:generate"],
+  "activationEvents": [
+    "coffeedocs:generate"
+  ],
   "repository": "https://github.com/frk1705/coffeedocs",
   "author": "Maximilian Schüßler <maximilian@mschuessler.org>",
   "license": "MIT",
