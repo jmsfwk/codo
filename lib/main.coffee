@@ -2,7 +2,8 @@ CoffeeDocs = require('./coffeedocs')
 
 module.exports =
   configDefaults:
-    addReturns: false
+    addReturns: true,
+    ReturnsDefaultType: "`undefined`"
 
   # Public: Package gets activated.
   activate: ->

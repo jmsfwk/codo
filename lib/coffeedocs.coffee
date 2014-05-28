@@ -9,6 +9,7 @@ class CoffeeDocs
   getConfig: (key) ->
     switch key
       when "addReturns" then atom.config.get("coffeedocs.addReturns")
+      when "ReturnsDefaultType" then atom.config.get("coffeedocs.ReturnsDefaultType")
       else null
 
   # Public: Get the active Editor.
@@ -108,7 +109,7 @@ class CoffeeDocs
         snippetIndex = snippetIndex+2
 
     if @getConfig("addReturns")
-      snippet += "\n#\n# Returns: {${#{snippetIndex}:Boolean}}"
+      snippet += "\n#\n# Returns: ${#{snippetIndex}:" + @getConfig("ReturnsDefaultType") + "}"
     snippet += "$0"
     return snippet
 
