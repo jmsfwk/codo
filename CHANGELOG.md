@@ -1,4 +1,4 @@
-## 0.2.1
+## 0.3.1
 * Add keybinds for :penguin: and :apple:.
 
 ## 0.2.0
