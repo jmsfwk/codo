@@ -11,7 +11,12 @@ Generate CoffeeScript documentation following the [Atom documentation styleguide
 
 ## How to use
 
-Place your active cursor on the line with the function definition. Press the assigned key (default: `Ctrl-Alt-d`) or activate `Coffeedocs: Generate` from the command palette.
+Place your active cursor on the line with the function definition. Press the assigned key or activate `Coffeedocs: Generate` from the command palette.
+
+### Default Keybindings
+- :apple: `cmd-alt-d`
+- :checkered_flag: `ctrl-alt-d`
+- :penguin: `ctrl-alt-shift-d`
 
 ## Contributions
 
