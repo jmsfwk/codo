@@ -1,3 +1,6 @@
+## 0.3.2
+* Code optimization (`coffeelint`).
+
 ## 0.3.1
 * Add keybinds for :penguin: and :apple:.
 
