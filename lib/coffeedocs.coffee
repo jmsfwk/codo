@@ -8,8 +8,8 @@ class CoffeeDocs
   # Returns: Returns the value of config key.
   getConfig: (key) ->
     switch key
-      when "addReturns" then atom.config.get("coffeedocs.addReturns")
-      when "ReturnsDefaultType" then atom.config.get("coffeedocs.ReturnsDefaultType")
+      when 'addReturns' then atom.config.get('coffeedocs.addReturns')
+      when 'ReturnsDefaultType' then atom.config.get('coffeedocs.ReturnsDefaultType')
       else null
 
   # Public: Get the active Editor.
@@ -81,7 +81,7 @@ class CoffeeDocs
     return if not editor? or not str?
     editor?.insertNewlineAbove()
 
-    Snippets = atom.packages.activePackages.snippets.mainModule;
+    Snippets = atom.packages.activePackages.snippets.mainModule
     Snippets?.insert(str, editor)
 
   # Public: Generates a suitable snippet base on the functionDef.
@@ -95,22 +95,22 @@ class CoffeeDocs
     functionName = functionDef.name
     functionArgs = functionDef.args
 
-    snippet = """
+    snippet = '''
       # ${1:Public:} ${2:[Description]}
-    """
+    '''
     snippetIndex = 3
 
     if functionArgs.length>=1
-      snippet += "\n#"
+      snippet += '\n#'
 
       functionArgs = @indentFunctionArgs(functionArgs)
       for arg in functionArgs
         snippet += "\n# #{arg} - The {${#{snippetIndex}:[type]}} ${#{snippetIndex+1}:[description]}"
         snippetIndex = snippetIndex+2
 
-    if @getConfig("addReturns")
-      snippet += "\n#\n# Returns: ${#{snippetIndex}:" + @getConfig("ReturnsDefaultType") + "}"
-    snippet += "$0"
+    if @getConfig('addReturns')
+      snippet += "\n#\n# Returns: ${#{snippetIndex}:" + @getConfig('ReturnsDefaultType') + '}'
+    snippet += '$0'
     return snippet
 
   # Public: Indentates the arguments and removes default values.
@@ -138,5 +138,5 @@ class CoffeeDocs
   # Returns: str as {String} with appended whitespaces.
   appendWhitespaces: (str, n) ->
     return str if n<1
-    str += " " for [0...n]
+    str += ' ' for [0...n]
     return str
