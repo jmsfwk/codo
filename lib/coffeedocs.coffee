@@ -28,14 +28,16 @@ class CoffeeDocs
   getFunctionDef: (editor, n) ->
     return unless @isFunctionDef(editor, n)
 
-    regex = /[a-zA-Z_$][a-zA-Z_$0-9]*=?\w*/g
-    line = @readLine(editor, n)
-    line = @readLine(editor, n)?.split('->')[0].split('=>')[0]
-    line = line?.match(regex)
-    return unless line.length >= 1
+    regex = /\s*([a-zA-Z_$@][a-zA-Z_$0-9]*) *[:=](\(?.*\)?) *[-=]>.*/
+    line = @readLine(editor, n)?.match(regex)
+    functionName = line[1]
+    functionArgs = []
 
-    functionName = line[0]
-    functionArgs = if line.length > 1 then line[1..] else functionArgs=[]
+    if /.*\((.*)\).*/.test line[2]
+      line = line[2].match /.*\((.*)\).*/
+      functionArgs = line[1].split(',')
+      for arg, i in functionArgs
+        functionArgs[i] = arg.match(/\s*(.*)\s*/)[1]
 
     return {name: functionName, args: functionArgs}
 
@@ -46,7 +48,7 @@ class CoffeeDocs
   #
   # Returns: {Boolean}
   isFunctionDef: (editor, n) ->
-    regex = /\s*[a-zA-Z_$@][a-zA-Z_$0-9]*:.*([-=]>).*/
+    regex = /\s*([a-zA-Z_$@][a-zA-Z_$0-9]*) *[:=](\(?.*\)?) *[-=]>.*/
     line = @readLine(editor, n)
     regex.test(line)
 
