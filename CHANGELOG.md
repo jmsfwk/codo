@@ -1,3 +1,6 @@
+## 0.4.0
+* Add support for functions being defined using `=`.
+
 ## 0.3.2
 * Code optimization (`coffeelint`).
 
