@@ -3,7 +3,8 @@ CoffeeDocs = require('./coffeedocs')
 module.exports =
   configDefaults:
     addReturns: true,
-    ReturnsDefaultType: '`undefined`'
+    ReturnsDefaultType: '`undefined`',
+    SearchLineBelowInstead: false
 
   # Public: Package gets activated.
   activate: ->

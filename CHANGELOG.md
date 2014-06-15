@@ -1,3 +1,6 @@
+## 0.5.0
+* Configurable if CoffeeDocs searches the same or the line below the cursor for the function definition.
+
 ## 0.4.0
 * Add support for functions being defined using `=`.
 

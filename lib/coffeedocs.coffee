@@ -6,11 +6,19 @@ class CoffeeDocs
   # key - The config key as {String}.
   #
   # Returns: Returns the value of config key.
-  getConfig: (key) ->
+  getConfigValue: (key) ->
     switch key
-      when 'addReturns' then atom.config.get('coffeedocs.addReturns')
-      when 'ReturnsDefaultType' then atom.config.get('coffeedocs.ReturnsDefaultType')
-      else null
+      when 'addReturns'
+        value = atom.config.get('coffeedocs.addReturns')
+        value ?= atom.config.getDefault('coffeedocs.addReturns')
+      when 'ReturnsDefaultType'
+        value = atom.config.get('coffeedocs.ReturnsDefaultType')
+        value ?= atom.config.getDefault('coffeedocs.ReturnsDefaultType')
+      when 'SearchLineBelowInstead'
+        value = atom.config.get('coffeedocs.SearchLineBelowInstead')
+        value ?= atom.config.getDefault('coffeedocs.SearchLineBelowInstead')
+      else value ?= null
+    value
 
   # Public: Get the active Editor.
   #
@@ -69,6 +77,8 @@ class CoffeeDocs
     return unless editor?
 
     linePos = editor.getCursorScreenRow()
+    linePos++ if @getConfigValue 'SearchLineBelowInstead'
+
     functionDef = @getFunctionDef(editor, linePos)
     return unless functionDef?
 
@@ -81,7 +91,10 @@ class CoffeeDocs
   # str    - The {String} containing the snippet code.
   writeSnippet: (editor, str) ->
     return if not editor? or not str?
-    editor?.insertNewlineAbove()
+    if @getConfigValue 'SearchLineBelowInstead'
+      editor?.insertNewline()
+    else
+      editor?.insertNewlineAbove()
 
     Snippets = atom.packages.activePackages.snippets.mainModule
     Snippets?.insert(str, editor)
@@ -110,8 +123,8 @@ class CoffeeDocs
         snippet += "\n# #{arg} - The {${#{snippetIndex}:[type]}} ${#{snippetIndex+1}:[description]}"
         snippetIndex = snippetIndex+2
 
-    if @getConfig('addReturns')
-      snippet += "\n#\n# Returns: ${#{snippetIndex}:" + @getConfig('ReturnsDefaultType') + '}'
+    if @getConfigValue('addReturns')
+      snippet += "\n#\n# Returns: ${#{snippetIndex}:" + @getConfigValue('ReturnsDefaultType') + '}'
     snippet += '$0'
     return snippet
 
