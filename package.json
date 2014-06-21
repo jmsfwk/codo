@@ -6,8 +6,8 @@
   "activationEvents": [
     "coffeedocs:generate"
   ],
-  "repository": "https://github.com/frk1705/coffeedocs",
-  "author": "Maximilian Schüßler <maximilian@mschuessler.org>",
+  "repository": "https://github.com/maschs/coffeedocs",
+  "author": "Maximilian Schüßler <git@mschuessler.org>",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
