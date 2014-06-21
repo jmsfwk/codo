@@ -1,6 +1,6 @@
 # CoffeeDocs
 
-[![Build Status](https://travis-ci.org/frk1705/coffeedocs.svg?branch=master)](https://travis-ci.org/frk1705/coffeedocs)
+[![Build Status](https://travis-ci.org/maschs/coffeedocs.svg?branch=master)](https://travis-ci.org/frk1705/coffeedocs)
 
 Generate CoffeeScript documentation following the [Atom documentation styleguide](https://github.com/atom/atom/blob/master/CONTRIBUTING.md#documentation-styleguide)!
 
