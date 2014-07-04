@@ -1,10 +1,10 @@
 # CoffeeDocs
 
-[![Build Status](https://travis-ci.org/maschs/coffeedocs.svg?branch=master)](https://travis-ci.org/frk1705/coffeedocs)
+[![Build Status](https://travis-ci.org/maschs/coffeedocs.svg?branch=master)](https://travis-ci.org/maschs/coffeedocs)
 
 Generate CoffeeScript documentation following the [Atom documentation styleguide](https://github.com/atom/atom/blob/master/CONTRIBUTING.md#documentation-styleguide)!
 
-![coffeedocs-generator](https://raw.github.com/frk1705/coffeedocs/master/docs/example.gif)
+![coffeedocs-generator](https://raw.github.com/maschs/coffeedocs/master/docs/example.gif)
 
 ## Features
 
