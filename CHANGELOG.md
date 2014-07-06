@@ -1,3 +1,7 @@
+## 0.6.0
+* Coffeedocs uses a new template for arguments:
+  `name - The [description] as {[type]}`
+
 ## 0.5.0
 * Configurable if CoffeeDocs searches the same or the line below the cursor for the function definition.
 
