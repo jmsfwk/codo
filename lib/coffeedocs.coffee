@@ -17,6 +17,9 @@ class CoffeeDocs
       when 'SearchLineBelowInstead'
         value = atom.config.get('coffeedocs.SearchLineBelowInstead')
         value ?= atom.config.getDefault('coffeedocs.SearchLineBelowInstead')
+      when 'argumentsTemplate'
+        value = atom.config.get('coffeedocs.argumentsTemplate')
+        value ?= atom.config.getDefault('coffeedocs.argumentsTemplate')
       else value ?= null
     value
 
@@ -120,7 +123,7 @@ class CoffeeDocs
 
       functionArgs = @indentFunctionArgs(functionArgs)
       for arg in functionArgs
-        snippet += "\n# #{arg} - The {${#{snippetIndex}:[type]}} ${#{snippetIndex+1}:[description]}"
+        snippet += "\n# #{arg} - The ${#{snippetIndex}:[description]} as {${#{snippetIndex+1}:[type]}}"
         snippetIndex = snippetIndex+2
 
     if @getConfigValue('addReturns')
