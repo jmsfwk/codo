@@ -1,7 +1,7 @@
 {
   "name": "coffeedocs",
   "main": "./lib/main",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Generate CoffeeScript documentation following the atom styleguide",
   "activationEvents": [
     "coffeedocs:generate"
