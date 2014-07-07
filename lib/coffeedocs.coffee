@@ -118,7 +118,7 @@ class CoffeeDocs
     functionArgs = functionDef.args
 
     snippet = '''
-      # ${1:Public:} ${2:[Description]}
+      # ${1:Public}: ${2:[Description]}
     '''
     snippetIndex = 3
 
@@ -127,7 +127,7 @@ class CoffeeDocs
 
       functionArgs = @indentFunctionArgs(functionArgs)
       for arg in functionArgs
-        snippet += "\n# #{arg} - The ${#{snippetIndex}:[description]} as {${#{snippetIndex+1}:[type]}}"
+        snippet += "\n# #{arg} - The ${#{snippetIndex}:[description]} as {${#{snippetIndex+1}:[type]}}."
         snippetIndex = snippetIndex+2
 
     if @getConfigValue('addReturns')
