@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2014 by Maximilian Schüßler. See LICENSE for details.
+#
+
 module.exports =
 class CoffeeDocs
 
