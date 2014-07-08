@@ -1,6 +1,9 @@
+### 0.7.0
+ * Add ability to generate class documentation.
+
 ### 0.6.1
- * Minimal changes to tabstops
- * Replace deprecated methods in specs
+ * Minimal changes to tabstops.
+ * Replace deprecated methods in specs.
 
 ### 0.6.0
 * Coffeedocs uses a new template for arguments:
