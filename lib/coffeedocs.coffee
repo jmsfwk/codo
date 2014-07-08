@@ -2,7 +2,6 @@
 # Copyright (c) 2014 by Maximilian Schüßler. See LICENSE for details.
 #
 
-module.exports =
 class CoffeeDocs
 
   # Public: Returns the setting under the key 'key'.
@@ -67,6 +66,31 @@ class CoffeeDocs
     line = @readLine(editor, n)
     regex.test(line)
 
+  # Public: Test if the line n defines a class.
+  #
+  # editor - The Editor to check from as {Object}.
+  # n      - The row to check as {Number}.
+  #
+  # Returns: {Boolean}
+  isClassDef: (editor, n) ->
+    regex = /[ \t]*class[ \t]*([$_a-zA-z0-9]+)[ \t]*(?:extends)?[ \t]*([$_a-zA-z0-9]*)/g
+    line = @readLine(editor, n)
+    regex.test(line)
+
+  # Public: Get the class definition from row n.
+  #
+  # editor - The Editor to read from as {Object}.
+  # n      - The row to read from as {Number}.
+  #
+  # Returns: The class definition as {Object}:
+  #   :name    - The name of the class as {String}.
+  #   :extends - The name of the class that is being extended as {String} or
+  #              `null` if there is none.
+  getClassDef: (editor, n) ->
+    regex = /[ \t]*class[ \t]*([$_a-zA-z0-9]+)[ \t]*(?:extends)?[ \t]*([$_a-zA-z0-9]*)/
+    line = @readLine(editor, n)?.match(regex)
+    {name: line?[1] or null, 'extends': if line?[2]?.length>0 then line[2] else null}
+
   # Public: Read the specified line.
   #
   # editor - The Editor to read from. If not set, use the active Editor.
@@ -86,10 +110,12 @@ class CoffeeDocs
     linePos = editor.getCursorScreenRow()
     linePos++ if @getConfigValue 'SearchLineBelowInstead'
 
+    classDef = @getClassDef(editor, linePos)
     functionDef = @getFunctionDef(editor, linePos)
-    return unless functionDef?
+    return unless classDef? or functionDef?
 
-    snippet = @generateSnippetFunc(functionDef)
+    snippet = @generateSnippetClass(classDef) if classDef?
+    snippet = @generateSnippetFunc(functionDef) if functionDef?
     @writeSnippet(editor, snippet)
 
   # Public: Write a snippet into active editor using the snippets package.
@@ -135,6 +161,27 @@ class CoffeeDocs
     snippet += '$0'
     return snippet
 
+  # Public: Generates a suitable snippet base for the classDef.
+  #
+  # classDef - The class definition as {Object}:
+  #   :name    - The name of the class as {String}.
+  #   :extends - The name of the class that is being extended as {String}.
+  #
+  # Returns: The snippet as {String}.
+  generateSnippetClass: (classDef) ->
+    className = classDef.name
+    classExtends = classDef.extends
+
+    if not classExtends?
+      snippet = """
+        # ${1:Public}: ${2:[Description]}.
+      """
+    else
+      snippet = """
+        # ${1:Public}: ${2:[Description]} that extends the {#{classExtends}} prototype.
+      """
+    snippet
+
   # Public: Indentates the arguments and removes default values.
   #
   # args - The {Array} containing the function arguments.
@@ -162,3 +209,5 @@ class CoffeeDocs
     return str if n<1
     str += ' ' for [0...n]
     return str
+
+module.exports = CoffeeDocs
