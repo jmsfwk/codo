@@ -23,6 +23,9 @@ class CoffeeDocs
       when 'argumentsTemplate'
         value = atom.config.get('coffeedocs.argumentsTemplate')
         value ?= atom.config.getDefault('coffeedocs.argumentsTemplate')
+      when 'ReturnsTemplate'
+        value = atom.config.get('coffeedocs.ReturnsTemplate')
+        value ?= atom.config.getDefault('coffeedocs.ReturnsTemplate')
       else value ?= null
     value
 
@@ -157,9 +160,12 @@ class CoffeeDocs
         snippetIndex = snippetIndex+2
 
     if @getConfigValue('addReturns')
-      snippet += "\n#\n# Returns: ${#{snippetIndex}:" + @getConfigValue('ReturnsDefaultType') + '}'
+      returnType = @getConfigValue('ReturnsDefaultType')
+      returnTemplate = @getConfigValue('ReturnsTemplate')
+      [partial] = partialSnippetReturns(returnTemplate, returnType, snippetIndex)
+      snippet += '\n#\n# ' + partial
+
     snippet += '$0'
-    return snippet
 
   # Public: Generates a suitable snippet base for the classDef.
   #
@@ -199,7 +205,7 @@ class CoffeeDocs
 
     return args
 
-  # Public: Appends n whitespaces to str.
+  # Internal: Appends n whitespaces to str.
   #
   # str - The {String} to append to.
   # n   - The amount of whitespaces to append.
@@ -209,5 +215,42 @@ class CoffeeDocs
     return str if n<1
     str += ' ' for [0...n]
     return str
+
+  # Internal: Parses the 'Returns' template and inserts the type if necessary.
+  #
+  # template     - The template as {String}.
+  #                %TYPE% will be surrounded by braces
+  #                %type% will be without any brackets.
+  # typeReturn   - The type that is being returned as {String}.
+  # snippetIndex - The snippetIndex as {Number}.
+  #
+  # Returns an {Array} with:
+  #   :0 - The parsed template.
+  #   :1 - The next free snippetIndex as {Number}.
+  partialSnippetReturns = (template, typeReturn, snippetIndex) ->
+    indexType = Math.max template.indexOf('%TYPE%'), template.indexOf('%type%')
+    indexDescription = template.indexOf('%desc%')
+
+    if indexType > -1 and indexDescription > -1
+      if indexType > indexDescription
+        replacementDescription = "${#{snippetIndex}:[Description]}"
+        replacementBraced   = "{${#{snippetIndex+1}:#{typeReturn}}}"
+        replacementUnbraced = "${#{snippetIndex+1}:#{typeReturn}}"
+      else
+        replacementDescription = "${#{snippetIndex+1}:[Description]}"
+        replacementBraced   = "{${#{snippetIndex}:#{typeReturn}}}"
+        replacementUnbraced = "${#{snippetIndex}:#{typeReturn}}"
+      snippetIndex += 2
+    else
+      replacementDescription = "${#{snippetIndex}:[Description]}"
+      replacementBraced   = "{${#{snippetIndex}:#{typeReturn}}}"
+      replacementUnbraced = "${#{snippetIndex}:#{typeReturn}}"
+      snippetIndex += 1 unless indexType is -1 and indexDescription is -1
+
+
+    template = template.replace '%desc%', replacementDescription
+    template = template.replace '%TYPE%', replacementBraced
+    template = template.replace '%type%', replacementUnbraced
+    [template, snippetIndex]
 
 module.exports = CoffeeDocs

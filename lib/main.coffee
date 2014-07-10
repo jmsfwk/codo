@@ -8,6 +8,7 @@ module.exports =
   configDefaults:
     addReturns: true,
     ReturnsDefaultType: '`undefined`',
+    ReturnsTemplate: 'Returns the %desc% as %type%.'
     SearchLineBelowInstead: false
 
   # Public: Package gets activated.
