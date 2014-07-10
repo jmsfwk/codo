@@ -2,6 +2,9 @@
 # Copyright (c) 2014 by Maximilian Schüßler. See LICENSE for details.
 #
 
+_ = require 'lodash'
+
+# Public: CoffeeDocs main class..
 class CoffeeDocs
 
   # Public: Returns the setting under the key 'key'.
@@ -228,10 +231,12 @@ class CoffeeDocs
   #   :0 - The parsed template.
   #   :1 - The next free snippetIndex as {Number}.
   partialSnippetReturns = (template, typeReturn, snippetIndex) ->
-    indexType = Math.max template.indexOf('%TYPE%'), template.indexOf('%type%')
+    indexType = _.max template.indexOf('%TYPE%'), template.indexOf('%type%')
     indexDescription = template.indexOf('%desc%')
+    containsType = indexType > -1
+    containsDesc = indexDescription > -1
 
-    if indexType > -1 and indexDescription > -1
+    if containsType and containsDesc
       if indexType > indexDescription
         replacementDescription = "${#{snippetIndex}:[Description]}"
         replacementBraced   = "{${#{snippetIndex+1}:#{typeReturn}}}"
@@ -245,7 +250,7 @@ class CoffeeDocs
       replacementDescription = "${#{snippetIndex}:[Description]}"
       replacementBraced   = "{${#{snippetIndex}:#{typeReturn}}}"
       replacementUnbraced = "${#{snippetIndex}:#{typeReturn}}"
-      snippetIndex += 1 unless indexType is -1 and indexDescription is -1
+      snippetIndex += 1 if containsType or containsDesc
 
 
     template = template.replace '%desc%', replacementDescription
