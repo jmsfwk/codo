@@ -51,7 +51,7 @@ class CoffeeDocs
       line = line[2].match /.*\((.*)\).*/
       functionArgs = line[1].split(',')
       for arg, i in functionArgs
-        functionArgs[i] = arg.match(/\s*(.*)\s*/)[1]
+        functionArgs[i] = arg.match(/\s*@?(.*)\s*/)[1]
 
     return {name: functionName, args: functionArgs}
 
@@ -173,9 +173,9 @@ class CoffeeDocs
     classExtends = classDef.extends
 
     if not classExtends?
-      snippet = """
+      snippet = '''
         # ${1:Public}: ${2:[Description]}.
-      """
+      '''
     else
       snippet = """
         # ${1:Public}: ${2:[Description]} that extends the {#{classExtends}} prototype.
