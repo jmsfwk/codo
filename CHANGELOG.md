@@ -1,3 +1,6 @@
+### 0.8.0
+ * The 'Returns'-block is now configurable with a template.
+
 ### 0.7.0
  * Add ability to generate class documentation.
 

@@ -10,10 +10,22 @@ Generate CoffeeScript documentation following the [Atom documentation styleguide
 
 * Generate CoffeeScript documentation.
 * Comment indentation for a clean look.
+* `Returns` statement is configurable via template.
 
 ## How to use
 
 Place your active cursor on the line with the function definition. Press the assigned key or activate `Coffeedocs: Generate` from the command palette.
+
+## Returns template
+
+You can set a custom template to use if `Add Returns` is enabled.
+
+`Returns the %desc% as %type%.`
+
+What does this mean?
+0. `%desc%` will be replaced by the `[description]` block.
+0. `%type%` will be replaced by your default type: `type`.
+0. `%TYPE%` will be replaced by your default type in braces: `{type}`.
 
 ### Default Keybindings
 - :apple: `cmd-alt-d`
