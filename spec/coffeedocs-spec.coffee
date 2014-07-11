@@ -4,7 +4,7 @@
 
 CoffeeDocs = require '../lib/coffeedocs'
 
-describe "CoffeeDocs", ->
+describe 'CoffeeDocs', ->
 
   [editor, coffeedocs] = []
 
