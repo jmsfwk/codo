@@ -20,12 +20,12 @@ Place your active cursor on the line with the function definition. Press the ass
 
 You can set a custom template to use if `Add Returns` is enabled.
 
-`Returns the %desc% as %type%.`
+`Returns the %desc% as %type%.` (Default template)
 
 What does this mean?
-0. `%desc%` will be replaced by the `[description]` block.
-0. `%type%` will be replaced by your default type: `type`.
-0. `%TYPE%` will be replaced by your default type in braces: `{type}`.
+* `%desc%` will be replaced by the `[description]` block.
+* `%type%` will be replaced by your default type: `type`.
+* `%TYPE%` will be replaced by your default type in braces: `{type}`.
 
 ### Default Keybindings
 - :apple: `cmd-alt-d`
