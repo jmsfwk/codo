@@ -248,8 +248,8 @@ class CoffeeDocs
       snippetIndex += 2
     else
       replacementDescription = "${#{snippetIndex}:[Description]}"
-      replacementBraced   = "{${#{snippetIndex}:#{typeReturn}}}"
-      replacementUnbraced = "${#{snippetIndex}:#{typeReturn}}"
+      replacementBraced   = "{${#{snippetIndex+1}:#{typeReturn}}}"
+      replacementUnbraced = "${#{snippetIndex+1}:#{typeReturn}}"
       snippetIndex += 1 if containsType or containsDesc
 
 
