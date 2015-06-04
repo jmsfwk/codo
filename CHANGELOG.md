@@ -1,3 +1,8 @@
+### 1.0.0 / 2015-06-04
+  * Update function argument style to latest AtomDoc
+  * Update documentation
+  * Prepare for Atom 1.0 API
+
 ### 0.8.0
  * The 'Returns'-block is now configurable with a template.
 
