@@ -142,7 +142,7 @@ class CoffeeDocs
   # Returns: The generated snippet as {String}.
   generateSnippetFunc: (functionDef) ->
     functionName = functionDef.name
-    functionArgs = functionDef.args
+    functionArgs = _.map(functionDef.args, (arg) -> "`#{arg}`")
 
     snippet = '''
       # ${1:Public}: ${2:[Description]}
@@ -154,7 +154,7 @@ class CoffeeDocs
 
       functionArgs = @indentFunctionArgs(functionArgs)
       for arg in functionArgs
-        snippet += "\n# * `#{arg}` The ${#{snippetIndex}:[description]} as {${#{snippetIndex+1}:[type]}}."
+        snippet += "\n# * #{arg} The ${#{snippetIndex}:[description]} as {${#{snippetIndex+1}:[type]}}."
         snippetIndex = snippetIndex+2
 
     if @getConfigValue('addReturns')
