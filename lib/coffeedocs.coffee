@@ -4,12 +4,12 @@
 
 _ = require 'lodash'
 
-# Public: CoffeeDocs main class..
+# Public: CoffeeDocs main class.
 class CoffeeDocs
 
   # Public: Returns the setting under the key 'key'.
   #
-  # key - The config key as {String}.
+  # * `key` The config key as {String}.
   #
   # Returns: Returns the value of config key.
   getConfigValue: (key) ->
@@ -34,12 +34,12 @@ class CoffeeDocs
 
   # Public: Returns the function definition from row n.
   #
-  # editor - The Editor to read from.
-  # n      - The row number to read from.
+  # * `editor` The Editor to read from.
+  # * `n`      The row number to read from.
   #
   # Returns: The function definition as {Object}:
-  #   :name - The name of the function as {String}.
-  #   :args - The arguments of the function as {Array}.
+  #   * `name` The name of the function as {String}.
+  #   * `args` The arguments of the function as {Array}.
   getFunctionDef: (editor, n) ->
     return unless @isFunctionDef(editor, n)
 
@@ -58,8 +58,8 @@ class CoffeeDocs
 
   # Public: Checks if the active line defines a function.
   #
-  # editor - The Editor to check from.
-  # n      - The row {Number} to check.
+  # * `editor` The Editor to check from.
+  # * `n`      The row {Number} to check.
   #
   # Returns: {Boolean}
   isFunctionDef: (editor, n) ->
@@ -69,8 +69,8 @@ class CoffeeDocs
 
   # Public: Test if the line n defines a class.
   #
-  # editor - The Editor to check from as {Object}.
-  # n      - The row to check as {Number}.
+  # * `editor` The Editor to check from as {Object}.
+  # * `n`      The row to check as {Number}.
   #
   # Returns: {Boolean}
   isClassDef: (editor, n) ->
@@ -80,13 +80,13 @@ class CoffeeDocs
 
   # Public: Get the class definition from row n.
   #
-  # editor - The Editor to read from as {Object}.
-  # n      - The row to read from as {Number}.
+  # * `editor` The Editor to read from as {Object}.
+  # * `n`      The row to read from as {Number}.
   #
   # Returns: The class definition as {Object}:
-  #   :name    - The name of the class as {String}.
-  #   :extends - The name of the class that is being extended as {String} or
-  #              `null` if there is none.
+  #   * `name`    The name of the class as {String}.
+  #   * `extends` The name of the class that is being extended as {String} or
+  #     `null` if there is none.
   getClassDef: (editor, n) ->
     regex = /[ \t]*class[ \t]*([$_a-zA-z0-9]+)[ \t]*(?:extends)?[ \t]*([$_a-zA-z0-9]*)/
     line = @readLine(editor, n)?.match(regex)
@@ -94,8 +94,8 @@ class CoffeeDocs
 
   # Public: Read the specified line.
   #
-  # editor - The Editor to read from. If not set, use the active Editor.
-  # n      - The row {Number} to read from.
+  # * `editor` The Editor to read from. If not set, use the active Editor.
+  # * `n`      The row {Number} to read from.
   #
   # Returns: The line as {String}.
   readLine: (editor, n) ->
@@ -103,7 +103,7 @@ class CoffeeDocs
     return editor.getCursor()?.getCurrentBufferLine() unless n?
     editor.lineTextForBufferRow(n)
 
-  # Public Static: Parse the active line.
+  # Public: Parse the active line.
   parse: ->
     editor = @getEditor()
     return unless editor?
@@ -121,8 +121,8 @@ class CoffeeDocs
 
   # Public: Write a snippet into active editor using the snippets package.
   #
-  # editor - The Editor the snippet gets activated in.
-  # str    - The {String} containing the snippet code.
+  # * `editor` The Editor the snippet gets activated in.
+  # * `str`    The {String} containing the snippet code.
   writeSnippet: (editor, str) ->
     return if not editor? or not str?
     if @getConfigValue 'SearchLineBelowInstead'
@@ -135,9 +135,9 @@ class CoffeeDocs
 
   # Public: Generates a suitable snippet base on the functionDef.
   #
-  # functionDef - The {Object} with the function definition:
-  #   :name - {String} with name of the function.
-  #   :args - {Array} with function arguments.
+  # * `functionDef` - The {Object} with the function definition:
+  #   * `name` {String} with name of the function.
+  #   * `args` {Array} with function arguments.
   #
   # Returns: The generated snippet as {String}.
   generateSnippetFunc: (functionDef) ->
@@ -167,9 +167,9 @@ class CoffeeDocs
 
   # Public: Generates a suitable snippet base for the classDef.
   #
-  # classDef - The class definition as {Object}:
-  #   :name    - The name of the class as {String}.
-  #   :extends - The name of the class that is being extended as {String}.
+  # * `classDef` The class definition as {Object}:
+  #   * `name`    The name of the class as {String}.
+  #   * `extends` The name of the class that is being extended as {String}.
   #
   # Returns: The snippet as {String}.
   generateSnippetClass: (classDef) ->
@@ -188,7 +188,7 @@ class CoffeeDocs
 
   # Public: Indentates the arguments and removes default values.
   #
-  # args - The {Array} containing the function arguments.
+  # * `args` The {Array} containing the function arguments.
   #
   # Returns: The indented arguments as {Array}.
   indentFunctionArgs: (args) ->
@@ -205,8 +205,8 @@ class CoffeeDocs
 
   # Internal: Appends n whitespaces to str.
   #
-  # str - The {String} to append to.
-  # n   - The amount of whitespaces to append.
+  # * `str` The {String} to append to.
+  # * `n`   The amount of whitespaces to append.
   #
   # Returns: str as {String} with appended whitespaces.
   appendWhitespaces: (str, n) ->
@@ -216,15 +216,15 @@ class CoffeeDocs
 
   # Internal: Parses the 'Returns' template and inserts the type if necessary.
   #
-  # template     - The template as {String}.
-  #                %TYPE% will be surrounded by braces
-  #                %type% will be without any brackets.
-  # typeReturn   - The type that is being returned as {String}.
-  # snippetIndex - The snippetIndex as {Number}.
+  # * `template`     The template as {String}.
+  #                  %TYPE% will be surrounded by braces
+  #                  %type% will be without any brackets.
+  # * `typeReturn`   The type that is being returned as {String}.
+  # * `snippetIndex` The snippetIndex as {Number}.
   #
   # Returns an {Array} with:
-  #   :0 - The parsed template.
-  #   :1 - The next free snippetIndex as {Number}.
+  #   * `0` The parsed template.
+  #   * `1` The next free snippetIndex as {Number}.
   partialSnippetReturns = (template, typeReturn, snippetIndex) ->
     indexType = _.max template.indexOf('%TYPE%'), template.indexOf('%type%')
     indexDescription = template.indexOf('%desc%')
