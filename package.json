@@ -1,10 +1,12 @@
 {
   "name": "coffeedocs",
   "main": "./lib/main",
-  "version": "0.8.2",
+  "version": "1.0.0",
   "description": "Generate CoffeeScript documentation following the atom styleguide",
   "activationCommands": {
-    "atom-text-editor": ["coffeedocs:generate"]
+    "atom-text-editor": [
+      "coffeedocs:generate"
+    ]
   },
   "repository": "https://github.com/maschs/coffeedocs",
   "author": "Maximilian Schüßler <git@mschuessler.org>",
