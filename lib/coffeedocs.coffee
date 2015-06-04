@@ -16,26 +16,21 @@ class CoffeeDocs
     switch key
       when 'addReturns'
         value = atom.config.get('coffeedocs.addReturns')
-        value ?= atom.config.getDefault('coffeedocs.addReturns')
       when 'ReturnsDefaultType'
         value = atom.config.get('coffeedocs.ReturnsDefaultType')
-        value ?= atom.config.getDefault('coffeedocs.ReturnsDefaultType')
       when 'SearchLineBelowInstead'
         value = atom.config.get('coffeedocs.SearchLineBelowInstead')
-        value ?= atom.config.getDefault('coffeedocs.SearchLineBelowInstead')
       when 'argumentsTemplate'
         value = atom.config.get('coffeedocs.argumentsTemplate')
-        value ?= atom.config.getDefault('coffeedocs.argumentsTemplate')
       when 'ReturnsTemplate'
         value = atom.config.get('coffeedocs.ReturnsTemplate')
-        value ?= atom.config.getDefault('coffeedocs.ReturnsTemplate')
       else value ?= null
     value
 
   # Public: Get the active Editor.
   #
   # Returns: The active Editor.
-  getEditor: -> atom.workspace.getActiveEditor()
+  getEditor: -> atom.workspace.getActiveTextEditor()
 
   # Public: Returns the function definition from row n.
   #
@@ -106,14 +101,14 @@ class CoffeeDocs
   readLine: (editor, n) ->
     editor = @getEditor() unless editor?
     return editor.getCursor()?.getCurrentBufferLine() unless n?
-    editor.lineForBufferRow(n)
+    editor.lineTextForBufferRow(n)
 
   # Public Static: Parse the active line.
   parse: ->
     editor = @getEditor()
     return unless editor?
 
-    linePos = editor.getCursorScreenRow()
+    linePos = editor.getCursorScreenPosition().row
     linePos++ if @getConfigValue 'SearchLineBelowInstead'
 
     classDef = @getClassDef(editor, linePos)

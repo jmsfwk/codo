@@ -2,17 +2,26 @@
 # Copyright (c) 2014 by Maximilian Schüßler. See LICENSE for details.
 #
 
-CoffeeDocs = require('./coffeedocs')
+CoffeeDocs = require './coffeedocs'
 
 module.exports =
-  configDefaults:
-    addReturns: true,
-    ReturnsDefaultType: '`undefined`',
-    ReturnsTemplate: 'Returns the %desc% as %type%.'
-    SearchLineBelowInstead: false
+  config:
+    addReturns:
+      type: 'boolean',
+      default: true
+    ReturnsDefaultType:
+      type: 'string',
+      default: '`undefined`',
+    ReturnsTemplate:
+      type: 'string',
+      default: 'Returns the %desc% as %type%.'
+    SearchLineBelowInstead:
+      type: 'boolean',
+      default:false
 
   # Public: Package gets activated.
   activate: ->
-    atom.workspaceView.command 'coffeedocs:generate', ->
-      coffeedocs = new CoffeeDocs()
-      coffeedocs.parse()
+    atom.commands.add 'atom-text-editor',
+      'coffeedocs:generate': ->
+        coffeedocs = new CoffeeDocs()
+        coffeedocs.parse()

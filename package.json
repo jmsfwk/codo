@@ -3,9 +3,9 @@
   "main": "./lib/main",
   "version": "0.8.2",
   "description": "Generate CoffeeScript documentation following the atom styleguide",
-  "activationEvents": [
-    "coffeedocs:generate"
-  ],
+  "activationCommands": {
+    "atom-text-editor": ["coffeedocs:generate"]
+  },
   "repository": "https://github.com/maschs/coffeedocs",
   "author": "Maximilian Schüßler <git@mschuessler.org>",
   "license": "MIT",
@@ -13,6 +13,6 @@
     "atom": ">0.50.0"
   },
   "dependencies": {
-    "lodash": "^2.4.1"
+    "lodash": "^3.9.3"
   }
 }
