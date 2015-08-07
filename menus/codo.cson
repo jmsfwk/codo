@@ -2,9 +2,9 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'CoffeeDocs'
+      'label': 'Codo'
       'submenu': [
-        { 'label': 'Generate', 'command': 'coffeedocs:generate' }
+        { 'label': 'Generate', 'command': 'codo:generate' }
       ]
     ]
   }

@@ -1,8 +1,8 @@
 #
-# Copyright (c) 2014 by Maximilian Schüßler. See LICENSE for details.
+# Copyright (c) 2015 by James Fenwick. See LICENSE for details.
 #
 
-CoffeeDocs = require './coffeedocs'
+Codo = require './codo'
 
 module.exports =
   config:
@@ -11,10 +11,10 @@ module.exports =
       default: true
     ReturnsDefaultType:
       type: 'string',
-      default: '`undefined`',
+      default: 'undefined',
     ReturnsTemplate:
       type: 'string',
-      default: 'Returns the %desc% as %type%.'
+      default: '@return %type% %desc%'
     SearchLineBelowInstead:
       type: 'boolean',
       default:false
@@ -22,6 +22,6 @@ module.exports =
   # Public: Package gets activated.
   activate: ->
     atom.commands.add 'atom-text-editor',
-      'coffeedocs:generate': ->
-        coffeedocs = new CoffeeDocs()
-        coffeedocs.parse()
+      'codo:generate': ->
+        Codo = new Codo()
+        Codo.parse()

@@ -1,29 +1,24 @@
 #
-# Copyright (c) 2014 by Maximilian Schüßler. See LICENSE for details.
+# Copyright (c) 2015 by James Fenwick. See LICENSE for details.
 #
 
 _ = require 'lodash'
 
-# Public: CoffeeDocs main class.
-class CoffeeDocs
+# Public: Codo main class.
+class Codo
 
-  # Public: Returns the setting under the key 'key'.
-  #
-  # * `key` The config key as {String}.
-  #
-  # Returns: Returns the value of config key.
   getConfigValue: (key) ->
     switch key
       when 'addReturns'
-        value = atom.config.get('coffeedocs.addReturns')
+        value = atom.config.get('codo.addReturns')
       when 'ReturnsDefaultType'
-        value = atom.config.get('coffeedocs.ReturnsDefaultType')
+        value = atom.config.get('codo.ReturnsDefaultType')
       when 'SearchLineBelowInstead'
-        value = atom.config.get('coffeedocs.SearchLineBelowInstead')
+        value = atom.config.get('codo.SearchLineBelowInstead')
       when 'argumentsTemplate'
-        value = atom.config.get('coffeedocs.argumentsTemplate')
+        value = atom.config.get('codo.argumentsTemplate')
       when 'ReturnsTemplate'
-        value = atom.config.get('coffeedocs.ReturnsTemplate')
+        value = atom.config.get('codo.ReturnsTemplate')
       else value ?= null
     value
 
@@ -142,10 +137,10 @@ class CoffeeDocs
   # Returns: The generated snippet as {String}.
   generateSnippetFunc: (functionDef) ->
     functionName = functionDef.name
-    functionArgs = _.map(functionDef.args, (arg) -> "`#{arg}`")
+    functionArgs = _.map(functionDef.args, (arg) -> "#{arg}")
 
     snippet = '''
-      # ${1:Public}: ${2:[Description]}
+      # ${1:[Description]}
     '''
     snippetIndex = 3
 
@@ -154,7 +149,7 @@ class CoffeeDocs
 
       functionArgs = @indentFunctionArgs(functionArgs)
       for arg in functionArgs
-        snippet += "\n# * #{arg} The ${#{snippetIndex}:[description]} as {${#{snippetIndex+1}:[type]}}."
+        snippet += "\n# @param {${#{snippetIndex}:[type]}} #{arg} The ${#{snippetIndex+1}:[description]}."
         snippetIndex = snippetIndex+2
 
     if @getConfigValue('addReturns')
@@ -178,11 +173,11 @@ class CoffeeDocs
 
     if not classExtends?
       snippet = '''
-        # ${1:Public}: ${2:[Description]}.
+        # ${1:[Description]}.
       '''
     else
       snippet = """
-        # ${1:Public}: ${2:[Description]} that extends the {#{classExtends}} prototype.
+        # ${1:[Description]} that extends the {#{classExtends}} prototype.
       """
     snippet
 
@@ -233,18 +228,18 @@ class CoffeeDocs
 
     if containsType and containsDesc
       if indexType > indexDescription
-        replacementDescription = "${#{snippetIndex}:[Description]}"
-        replacementBraced   = "{${#{snippetIndex+1}:#{typeReturn}}}"
-        replacementUnbraced = "${#{snippetIndex+1}:#{typeReturn}}"
+        replacementDescription = "${#{snippetIndex+1}:[Description]}"
+        replacementBraced   = "{${#{snippetIndex}:#{typeReturn}}}"
+        replacementUnbraced = "${#{snippetIndex}:#{typeReturn}}"
       else
         replacementDescription = "${#{snippetIndex+1}:[Description]}"
         replacementBraced   = "{${#{snippetIndex}:#{typeReturn}}}"
         replacementUnbraced = "${#{snippetIndex}:#{typeReturn}}"
       snippetIndex += 2
     else
-      replacementDescription = "${#{snippetIndex}:[Description]}"
-      replacementBraced   = "{${#{snippetIndex+1}:#{typeReturn}}}"
-      replacementUnbraced = "${#{snippetIndex+1}:#{typeReturn}}"
+      replacementDescription = "${#{snippetIndex+1}:[Description]}"
+      replacementBraced   = "{${#{snippetIndex}:#{typeReturn}}}"
+      replacementUnbraced = "${#{snippetIndex}:#{typeReturn}}"
       snippetIndex += 1 if containsType or containsDesc
 
 
@@ -253,4 +248,4 @@ class CoffeeDocs
     template = template.replace '%type%', replacementUnbraced
     [template, snippetIndex]
 
-module.exports = CoffeeDocs
+module.exports = Codo

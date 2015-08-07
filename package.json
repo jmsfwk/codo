@@ -1,15 +1,15 @@
 {
-  "name": "coffeedocs",
+  "name": "codo",
   "main": "./lib/main",
-  "version": "1.0.0",
-  "description": "Generate CoffeeScript documentation following the atom styleguide",
+  "version": "0.0.0",
+  "description": "Generate CoffeeScript documentation in the Codo style",
   "activationCommands": {
     "atom-text-editor": [
-      "coffeedocs:generate"
+      "codo:generate"
     ]
   },
-  "repository": "https://github.com/maschs/coffeedocs",
-  "author": "Maximilian Schüßler <git@mschuessler.org>",
+  "repository": null,
+  "author": "James Fenwick",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
