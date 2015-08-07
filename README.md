@@ -4,7 +4,7 @@ Generate CoffeeScript documentation following the [Codo](https://github.com/coff
 
 A fork of [Coffeedoc](https://github.com/maschs/coffeedocs) by Maximilian Schüßler.
 
-![codo-generator](/docs/example.gif)
+![codo-generator](https://raw.githubusercontent.com/jmsfwk/codo/master/docs/example.gif)
 
 ## Features
 
