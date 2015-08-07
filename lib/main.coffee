@@ -23,5 +23,5 @@ module.exports =
   activate: ->
     atom.commands.add 'atom-text-editor',
       'codo:generate', ->
-        Codo = new Codo()
-        Codo.parse()
+        codo = new Codo()
+        codo.parse()
