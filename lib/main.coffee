@@ -22,6 +22,6 @@ module.exports =
   # Public: Package gets activated.
   activate: ->
     atom.commands.add 'atom-text-editor',
-      'codo:generate': ->
+      'codo:generate', ->
         Codo = new Codo()
         Codo.parse()
