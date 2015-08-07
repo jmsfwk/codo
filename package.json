@@ -8,7 +8,7 @@
       "codo:generate"
     ]
   },
-  "repository": null,
+  "repository": "http://github.com/jmsfwk/codo",
   "author": "James Fenwick",
   "license": "MIT",
   "engines": {
